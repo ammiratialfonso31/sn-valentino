@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una domanda importante ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 400px;
+}
+
+img {
+    width: 200px;
+    border-radius: 15px;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+}
+
+#noBtn {
+    background-color: white;
+    color: #ff4d6d;
+    padding: 15px 30px;
+    font-size: 18px;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+    <h1>Vuoi essere la mia Valentina? ❤️</h1>
+    <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif">
+    
+    <div class="buttons">
+        <button id="yesBtn">Sì ❤️</button>
+        <button id="noBtn">No 🙄</button>
+    </div>
+</div>
+
+<script>
+let yesSize = 18;
+let noSize = 18;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("click", () => {
+    yesSize += 6;
+    noSize -= 3;
+
+    yesBtn.style.fontSize = yesSize + "px";
+    yesBtn.style.padding = (15 + yesSize/4) + "px " + (30 + yesSize/4) + "px";
+
+    if(noSize > 8){
+        noBtn.style.fontSize = noSize + "px";
+        noBtn.style.padding = (15 - yesSize/6) + "px " + (30 - yesSize/6) + "px";
+    } else {
+        noBtn.style.display = "none";
+    }
+});
+
+yesBtn.addEventListener("click", () => {
+    document.getElementById("mainContent").innerHTML = `
+        <h1>Lo sapevoo❤️</h1>
+        <img src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif">
+    `;
+    startHearts();
+});
+
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 250);
+}
+</script>
+
+</body>
+</html>
